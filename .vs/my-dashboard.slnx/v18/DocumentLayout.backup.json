@@ -1,0 +1,355 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\smcri\\.copilot\\plans\\plan-build-the-full-dd-campaign-manager-dashboard.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|MarkdownSecurePreview"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\app\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\smcri\\.copilot\\plans\\plan-complete-the-dd-5e-campaign-manager-features.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|MarkdownSecurePreview"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\eslint.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\eslint.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\globals.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\app\\globals.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\tsconfig.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\tsconfig.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\postcss.config.mjs||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\postcss.config.mjs||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\.vscode\\launch.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\.vscode\\launch.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\layout.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\app\\layout.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\smcri\\source\\repos\\my-dashboard\\package-lock.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package-lock.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\smcri\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-64435256\\package-lock.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\hooks\\uselocalstorage.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\hooks\\uselocalstorage.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\create\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\app\\create\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\components\\mapcanvas.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\components\\mapcanvas.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\maps\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\app\\maps\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\components\\storygraph.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\components\\storygraph.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\story\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\app\\story\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\locations\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\app\\locations\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|c:\\users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\components\\primarynavigation.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{C599DAA7-1759-C34A-87FC-E93BF124FEF4}|my-dashboard\\my-dashboard.esproj|solutionrelative:my-dashboard\\src\\components\\primarynavigation.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "PrimaryNavigation.tsx",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\components\\PrimaryNavigation.tsx",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\components\\PrimaryNavigation.tsx",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\components\\PrimaryNavigation.tsx",
+              "RelativeToolTip": "my-dashboard\\src\\components\\PrimaryNavigation.tsx",
+              "ViewState": "AgIAABgAAAAAAAAAAIBJwCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-10-16T22:50:00.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "plan-build-the-full-dd-campaign-manager-dashboard.md [Preview]",
+              "DocumentMoniker": "C:\\Users\\smcri\\.copilot\\plans\\plan-build-the-full-dd-campaign-manager-dashboard.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\.copilot\\plans\\plan-build-the-full-dd-campaign-manager-dashboard.md",
+              "ToolTip": "C:\\Users\\smcri\\.copilot\\plans\\plan-build-the-full-dd-campaign-manager-dashboard.md [Preview]",
+              "RelativeToolTip": "..\\..\\..\\.copilot\\plans\\plan-build-the-full-dd-campaign-manager-dashboard.md [Preview]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-10-16T22:34:49.824Z",
+              "EditorCaption": " [Preview]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\locations\\page.tsx",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\app\\locations\\page.tsx",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\locations\\page.tsx",
+              "RelativeToolTip": "my-dashboard\\src\\app\\locations\\page.tsx",
+              "ViewState": "AgIAADQAAAAAAAAAAIBJwH8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-10-16T22:21:41.623Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\story\\page.tsx",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\app\\story\\page.tsx",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\story\\page.tsx",
+              "RelativeToolTip": "my-dashboard\\src\\app\\story\\page.tsx",
+              "ViewState": "AgIAAIoAAAAAAAAAAIBJwPIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-10-16T22:20:32.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "StoryGraph.tsx",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\components\\StoryGraph.tsx",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\components\\StoryGraph.tsx",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\components\\StoryGraph.tsx",
+              "RelativeToolTip": "my-dashboard\\src\\components\\StoryGraph.tsx",
+              "ViewState": "AgIAAKUAAAAAAAAAAIBJwNIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-10-16T22:19:51.868Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\maps\\page.tsx",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\app\\maps\\page.tsx",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\maps\\page.tsx",
+              "RelativeToolTip": "my-dashboard\\src\\app\\maps\\page.tsx",
+              "ViewState": "AgIAADQAAAAAAAAAAIBJwFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-10-16T22:18:31.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "MapCanvas.tsx",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\components\\MapCanvas.tsx",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\components\\MapCanvas.tsx",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\components\\MapCanvas.tsx",
+              "RelativeToolTip": "my-dashboard\\src\\components\\MapCanvas.tsx",
+              "ViewState": "AgIAAF4BAAAAAAAAAIBJwIsBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-10-16T22:17:58.74Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\create\\page.tsx",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\app\\create\\page.tsx",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\create\\page.tsx",
+              "RelativeToolTip": "my-dashboard\\src\\app\\create\\page.tsx",
+              "ViewState": "AgIAABkAAAAAAAAAAIBJwCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-10-16T22:16:31.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "useLocalStorage.ts",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\hooks\\useLocalStorage.ts",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\hooks\\useLocalStorage.ts",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\hooks\\useLocalStorage.ts",
+              "RelativeToolTip": "my-dashboard\\src\\hooks\\useLocalStorage.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-10-16T22:15:22.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "plan-complete-the-dd-5e-campaign-manager-features.md [Preview]",
+              "DocumentMoniker": "C:\\Users\\smcri\\.copilot\\plans\\plan-complete-the-dd-5e-campaign-manager-features.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\.copilot\\plans\\plan-complete-the-dd-5e-campaign-manager-features.md",
+              "ToolTip": "C:\\Users\\smcri\\.copilot\\plans\\plan-complete-the-dd-5e-campaign-manager-features.md [Preview]",
+              "RelativeToolTip": "..\\..\\..\\.copilot\\plans\\plan-complete-the-dd-5e-campaign-manager-features.md [Preview]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-10-16T21:58:01.378Z",
+              "EditorCaption": " [Preview]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "package-lock.json",
+              "DocumentMoniker": "C:\\Users\\smcri\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-64435256\\package-lock.json",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-64435256\\package-lock.json",
+              "ToolTip": "C:\\Users\\smcri\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-64435256\\package-lock.json",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-64435256\\package-lock.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-16T20:28:36.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "package-lock.json",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\package-lock.json",
+              "RelativeDocumentMoniker": "package-lock.json",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\package-lock.json",
+              "RelativeToolTip": "package-lock.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-16T20:28:36.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "eslint.config.js",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\eslint.config.js",
+              "RelativeDocumentMoniker": "my-dashboard\\eslint.config.js",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\eslint.config.js",
+              "RelativeToolTip": "my-dashboard\\eslint.config.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-10-16T19:55:20.916Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "postcss.config.mjs",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\postcss.config.mjs",
+              "RelativeDocumentMoniker": "my-dashboard\\postcss.config.mjs",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\postcss.config.mjs",
+              "RelativeToolTip": "my-dashboard\\postcss.config.mjs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-10-16T19:48:20.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "globals.css",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\globals.css",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\app\\globals.css",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\globals.css",
+              "RelativeToolTip": "my-dashboard\\src\\app\\globals.css",
+              "ViewState": "AgIAALQAAAAAAAAAAAAEwN4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-10-16T19:48:20.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "tsconfig.json",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\tsconfig.json",
+              "RelativeDocumentMoniker": "my-dashboard\\tsconfig.json",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\tsconfig.json",
+              "RelativeToolTip": "my-dashboard\\tsconfig.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-16T19:34:24.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "launch.json",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\.vscode\\launch.json",
+              "RelativeDocumentMoniker": "my-dashboard\\.vscode\\launch.json",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\.vscode\\launch.json",
+              "RelativeToolTip": "my-dashboard\\.vscode\\launch.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-16T19:50:10.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "layout.tsx",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\layout.tsx",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\app\\layout.tsx",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\layout.tsx",
+              "RelativeToolTip": "my-dashboard\\src\\app\\layout.tsx",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAYwB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-10-16T19:48:20.979Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\page.tsx",
+              "RelativeDocumentMoniker": "my-dashboard\\src\\app\\page.tsx",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\src\\app\\page.tsx",
+              "RelativeToolTip": "my-dashboard\\src\\app\\page.tsx",
+              "ViewState": "AgIAABUAAAAAAAAAAAAkwCgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-10-16T19:48:20.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\package.json",
+              "RelativeDocumentMoniker": "my-dashboard\\package.json",
+              "ToolTip": "C:\\Users\\smcri\\source\\repos\\my-dashboard\\my-dashboard\\package.json",
+              "RelativeToolTip": "my-dashboard\\package.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-10-16T19:34:23.493Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+﻿/**
+ * @file route.ts
+ * @description Next.js Server Route Handler for generating character artwork.
+ * Path: /api/generate-art
+ */
+
+import { NextResponse } from 'next/server';
+
+const MODEL_ENDPOINT = 'https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell';
+
+export async function POST(request: Request) {
+    let body: unknown;
+
+    try {
+        body = await request.json();
+    } catch {
+        return NextResponse.json({ error: 'Request body must be valid JSON.' }, { status: 400 });
+    }
+
+    if (typeof body !== 'object' || body === null) {
+        return NextResponse.json({ error: 'Request body must be an object.' }, { status: 400 });
+    }
+
+    const { prompt, characterName, kind } = body as Record<string, unknown>;
+    if (
+        typeof prompt !== 'string' || !prompt.trim() ||
+        typeof characterName !== 'string' || !characterName.trim() ||
+        (kind !== undefined && kind !== 'portrait' && kind !== 'landscape')
+    ) {
+        return NextResponse.json({ error: 'A name, prompt description, and supported artwork kind are required.' }, { status: 400 });
+    }
+
+    const apiKey = process.env.HUGGINGFACE_API_KEY;
+    if (!apiKey) {
+        return NextResponse.json({ error: 'Image generation is not configured. Set HUGGINGFACE_API_KEY on the server.' }, { status: 503 });
+    }
+
+    const visualPrompt = kind === 'landscape'
+        ? `landscape of ${characterName.trim()}, ${prompt.trim()}`
+        : `${characterName.trim()}, ${prompt.trim()}`;
+    const fullPrompt = `classical medieval fantasy illustration of ${visualPrompt}, detailed oil painting, warm golden hour lighting, Dungeons and Dragons style`;
+
+    try {
+        const response = await fetch(MODEL_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${apiKey}`,
+                'Content-Type': 'application/json',
+                Accept: 'image/*',
+            },
+            body: JSON.stringify({ inputs: fullPrompt }),
+            signal: AbortSignal.timeout(90_000),
+        });
+
+        if (!response.ok) {
+            const providerMessage = (await response.text()).slice(0, 500);
+            console.error('Hugging Face image generation failed:', response.status, providerMessage);
+            return NextResponse.json(
+                { error: response.status === 401 || response.status === 403
+                    ? 'Hugging Face rejected the server API key.'
+                    : response.status === 503
+                        ? 'The image model is loading. Please try again shortly.'
+                        : 'The image provider could not generate artwork right now.' },
+                { status: response.status === 401 || response.status === 403 ? 502 : response.status === 503 ? 503 : 502 }
+            );
+        }
+
+        const contentType = response.headers.get('content-type')?.split(';')[0] ?? '';
+        if (!contentType.startsWith('image/')) {
+            console.error('Hugging Face returned an unexpected content type:', contentType);
+            return NextResponse.json({ error: 'The image provider returned an unsupported response.' }, { status: 502 });
+        }
+
+        const image = Buffer.from(await response.arrayBuffer()).toString('base64');
+        return NextResponse.json({ url: `data:${contentType};base64,${image}` });
+    } catch (error) {
+        console.error('Hugging Face image generation request failed:', error);
+        return NextResponse.json({ error: 'Could not reach the image provider. Please try again.' }, { status: 502 });
+    }
+}

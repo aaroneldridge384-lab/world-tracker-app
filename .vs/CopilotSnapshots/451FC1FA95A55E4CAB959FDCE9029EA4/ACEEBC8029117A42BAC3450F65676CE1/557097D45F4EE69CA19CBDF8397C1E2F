@@ -1,0 +1,232 @@
+﻿'use client';
+
+import { useEffect, useState, type FormEvent } from 'react';
+import Link from 'next/link';
+import StoryGraph from '@/components/StoryGraph';
+import { INITIAL_CHARACTERS, INITIAL_LOCATIONS } from '@/data/mockCampaign';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+import type { CampaignNote, QuestEntry, QuestStatus, StoryEdge, StoryNode } from '@/types/campaign';
+
+const EMPTY_NODES: StoryNode[] = [];
+const EMPTY_EDGES: StoryEdge[] = [];
+const EMPTY_NOTES: CampaignNote[] = [];
+const EMPTY_QUESTS: QuestEntry[] = [];
+
+function renderMentions(text: string, characters: typeof INITIAL_CHARACTERS, locations: typeof INITIAL_LOCATIONS, nodes: StoryNode[]) {
+    const parts = text.split(/(\[\[[^\]]+\]\])/g);
+    return parts.map((part, index) => {
+        const match = part.match(/^\[\[([^\]]+)\]\]$/);
+        if (!match) return <span key={index}>{part}</span>;
+        const title = match[1].trim();
+        const character = characters.find((item) => item.name.toLowerCase() === title.toLowerCase());
+        if (character) return <Link key={index} href={`/#${character.id}`} className="text-amber-400 underline">{title}</Link>;
+        const location = locations.find((item) => item.name.toLowerCase() === title.toLowerCase());
+        if (location) return <Link key={index} href={`/locations#${location.id}`} className="text-emerald-400 underline">{title}</Link>;
+        const node = nodes.find((item) => item.title.toLowerCase() === title.toLowerCase());
+        if (node) return <Link key={index} href={`/story#${node.id}`} className="text-sky-400 underline">{title}</Link>;
+        return <span key={index} className="text-slate-300">{title}</span>;
+    });
+}
+
+export default function StoryPage() {
+    const [characters, , charactersLoaded] = useLocalStorage('dnd-characters', INITIAL_CHARACTERS);
+    const [locations, , locationsLoaded] = useLocalStorage('dnd-locations', INITIAL_LOCATIONS);
+    const [nodes, setNodes, nodesLoaded] = useLocalStorage('dnd-story-nodes', EMPTY_NODES);
+    const [edges, setEdges, edgesLoaded] = useLocalStorage('dnd-story-edges', EMPTY_EDGES);
+    const [notes, setNotes, notesLoaded] = useLocalStorage('dnd-story-notes', EMPTY_NOTES);
+    const [quests, setQuests, questsLoaded] = useLocalStorage('dnd-quests', EMPTY_QUESTS);
+    const [seeded, setSeeded, seededLoaded] = useLocalStorage('dnd-story-seeded', false);
+    const [noteTitle, setNoteTitle] = useState('');
+    const [noteBody, setNoteBody] = useState('');
+    const [questTitle, setQuestTitle] = useState('');
+    const [questDescription, setQuestDescription] = useState('');
+    const [questStatus, setQuestStatus] = useState<QuestStatus>('active');
+    const [questLinkId, setQuestLinkId] = useState('');
+
+    useEffect(() => {
+        if (!charactersLoaded || !locationsLoaded || !nodesLoaded || !seededLoaded || seeded) return;
+        const seededNodes: StoryNode[] = [
+            ...characters.map((character, index) => ({
+                id: `character-${character.id}`,
+                title: character.name,
+                kind: 'Character' as const,
+                description: `${character.race} ${character.characterClass}`,
+                x: 150,
+                y: 100 + index * 100,
+                linkedEntityId: character.id,
+            })),
+            ...locations.map((location, index) => ({
+                id: `location-${location.id}`,
+                title: location.name,
+                kind: 'Location' as const,
+                description: location.summary,
+                x: 820,
+                y: 100 + index * 100,
+                linkedEntityId: location.id,
+            })),
+        ];
+        if (nodes.length === 0 && seededNodes.length > 0) setNodes(seededNodes);
+        setSeeded(true);
+    }, [characters, charactersLoaded, locations, locationsLoaded, nodes, nodesLoaded, seeded, seededLoaded, setNodes, setSeeded]);
+
+    const saveNote = (event: FormEvent) => {
+        event.preventDefault();
+        if (!noteTitle.trim() || !noteBody.trim()) return;
+        setNotes((current) => [{
+            id: crypto.randomUUID(),
+            title: noteTitle.trim(),
+            body: noteBody.trim(),
+            updatedAt: new Date().toISOString(),
+        }, ...current]);
+        setNoteTitle('');
+        setNoteBody('');
+    };
+
+    const addQuest = (event: FormEvent) => {
+        event.preventDefault();
+        if (!questTitle.trim()) return;
+        const questNode: StoryNode = {
+            id: crypto.randomUUID(),
+            title: questTitle.trim(),
+            kind: 'Quest',
+            description: questDescription.trim(),
+            x: 500 + Math.random() * 120 - 60,
+            y: 480,
+        };
+        setNodes((current) => [...current, questNode]);
+        if (questLinkId) {
+            setEdges((current) => [...current, {
+                id: crypto.randomUUID(),
+                from: questNode.id,
+                to: questLinkId,
+                label: 'involves',
+            }]);
+        }
+        setQuests((current) => [{
+            id: crypto.randomUUID(),
+            title: questTitle.trim(),
+            description: questDescription.trim(),
+            status: questStatus,
+            linkedNodeIds: [questNode.id, ...(questLinkId ? [questLinkId] : [])],
+        }, ...current]);
+        setQuestTitle('');
+        setQuestDescription('');
+        setQuestStatus('active');
+        setQuestLinkId('');
+    };
+
+    const updateQuestStatus = (id: string, status: QuestStatus) => {
+        setQuests((current) => current.map((quest) => quest.id === id ? { ...quest, status } : quest));
+    };
+
+    const deleteQuest = (quest: QuestEntry) => {
+        const questNodeId = quest.linkedNodeIds.find((id) => nodes.some((node) => node.id === id && node.kind === 'Quest'));
+        setQuests((current) => current.filter((item) => item.id !== quest.id));
+        if (questNodeId) {
+            setNodes((current) => current.filter((node) => node.id !== questNodeId));
+            setEdges((current) => current.filter((edge) => edge.from !== questNodeId && edge.to !== questNodeId));
+        }
+    };
+
+    const deleteNote = (id: string) => setNotes((current) => current.filter((note) => note.id !== id));
+
+    const isLoaded = charactersLoaded && locationsLoaded && nodesLoaded && edgesLoaded && notesLoaded && questsLoaded && seededLoaded;
+    if (!isLoaded) return <p className="text-slate-400">Loading campaign story…</p>;
+
+    const activeQuests = quests.filter((quest) => quest.status === 'active');
+    const completedQuests = quests.filter((quest) => quest.status === 'completed');
+    const clues = quests.filter((quest) => quest.status === 'clue');
+
+    return (
+        <main className="space-y-6">
+            <header className="fantasy-panel rounded-2xl p-6 sm:p-8">
+                <p className="fantasy-kicker">The threads of fate</p>
+                <h1 className="fantasy-heading mt-2 text-3xl font-bold">Story & Campaign Knowledge</h1>
+                <p className="mt-2 max-w-3xl font-sans text-sm text-slate-400">Connect people, places, factions, quests, and clues. Use [[Name]] mentions in notes to link campaign entities.</p>
+            </header>
+
+            <StoryGraph
+                nodes={nodes}
+                edges={edges}
+                characters={characters}
+                locations={locations}
+                onNodesChange={setNodes}
+                onEdgesChange={setEdges}
+            />
+
+            <section className="grid gap-5 xl:grid-cols-[1.1fr_1fr]">
+                <div className="fantasy-panel space-y-4 rounded-xl p-4 sm:p-5">
+                    <div>
+                        <h2 className="fantasy-heading text-xl font-bold">Campaign Notes</h2>
+                        <p className="font-sans text-xs text-slate-400">Write [[Character Name]] or [[Location Name]] to create links in the preview.</p>
+                    </div>
+                    <form onSubmit={saveNote} className="space-y-2">
+                        <input value={noteTitle} onChange={(event) => setNoteTitle(event.target.value)} placeholder="Note title" required className="w-full rounded-lg border border-slate-700 bg-[#090c12] p-2.5 font-sans text-sm text-white placeholder:text-slate-600" />
+                        <textarea value={noteBody} onChange={(event) => setNoteBody(event.target.value)} placeholder="The party discovered [[Oakhaven]]..." rows={4} required className="w-full rounded-lg border border-slate-700 bg-[#090c12] p-2.5 font-sans text-sm text-white placeholder:text-slate-600" />
+                        <button type="submit" className="rounded-lg bg-gradient-to-r from-amber-700 to-amber-500 px-3 py-2 font-sans text-xs font-bold text-[#17120a] shadow-lg shadow-amber-950/30 transition hover:brightness-110">Save Note</button>
+                    </form>
+                    <div className="space-y-3">
+                        {notes.map((note) => (
+                            <article key={note.id} className="rounded-lg border border-amber-200/10 bg-[#0b0f16] p-3">
+                                <div className="flex items-start justify-between gap-3">
+                                    <h3 className="font-semibold text-slate-100">{note.title}</h3>
+                                    <button type="button" onClick={() => deleteNote(note.id)} className="text-xs text-rose-300 hover:text-rose-200">Delete</button>
+                                </div>
+                                <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-slate-300">{renderMentions(note.body, characters, locations, nodes)}</p>
+                                <time className="mt-2 block text-[10px] text-slate-500">Updated {new Date(note.updatedAt).toLocaleString()}</time>
+                            </article>
+                        ))}
+                        {notes.length === 0 && <p className="text-sm text-slate-500">No notes saved yet.</p>}
+                    </div>
+                </div>
+
+                <div className="fantasy-panel space-y-4 rounded-xl p-4 sm:p-5">
+                    <div>
+                        <h2 className="fantasy-heading text-xl font-bold">Quest Tracker</h2>
+                        <p className="font-sans text-xs text-slate-400">Track active quests, completed objectives, and unresolved clues.</p>
+                    </div>
+                    <form onSubmit={addQuest} className="space-y-2 rounded-lg border border-amber-200/10 bg-[#0b0f16] p-3">
+                        <input value={questTitle} onChange={(event) => setQuestTitle(event.target.value)} placeholder="Quest or clue title" required className="w-full rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white placeholder:text-slate-600" />
+                        <textarea value={questDescription} onChange={(event) => setQuestDescription(event.target.value)} placeholder="Objective, clue, or next step" rows={2} className="w-full rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white placeholder:text-slate-600" />
+                        <div className="grid gap-2 sm:grid-cols-2">
+                            <select value={questStatus} onChange={(event) => setQuestStatus(event.target.value as QuestStatus)} className="rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white"><option value="active">Active Quest</option><option value="completed">Completed Objective</option><option value="clue">Unresolved Clue</option></select>
+                            <select value={questLinkId} onChange={(event) => setQuestLinkId(event.target.value)} className="rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white"><option value="">No related node</option>{nodes.map((node) => <option key={node.id} value={node.id}>{node.title}</option>)}</select>
+                        </div>
+                        <button type="submit" className="rounded-lg bg-gradient-to-r from-amber-700 to-amber-500 px-3 py-2 font-sans text-xs font-bold text-[#17120a] transition hover:brightness-110">Add Quest / Clue</button>
+                    </form>
+
+                    {[
+                        { title: 'Active Quests', items: activeQuests },
+                        { title: 'Completed Objectives', items: completedQuests },
+                        { title: 'Unresolved Clues', items: clues },
+                    ].map((group) => (
+                        <section key={group.title} className="space-y-2">
+                            <h3 className="font-sans text-sm font-semibold text-amber-100">{group.title} <span className="text-slate-500">({group.items.length})</span></h3>
+                            {group.items.map((quest) => (
+                                <article key={quest.id} className="rounded-lg border border-amber-200/10 bg-[#0b0f16] p-3">
+                                    <div className="flex items-start justify-between gap-2">
+                                        <div>
+                                            <h4 className="font-semibold text-slate-100">{quest.title}</h4>
+                                            {quest.description && <p className="mt-1 text-sm text-slate-400">{quest.description}</p>}
+                                        </div>
+                                        <button type="button" onClick={() => deleteQuest(quest)} className="text-xs text-rose-300 hover:text-rose-200">Delete</button>
+                                    </div>
+                                    <div className="mt-2 flex flex-wrap gap-2">
+                                        {quest.linkedNodeIds.map((id) => {
+                                            const node = nodes.find((item) => item.id === id);
+                                            return node ? <Link key={id} href={`/story#${id}`} className="rounded-full bg-slate-800 px-2.5 py-1 text-[11px] text-sky-300">{node.title}</Link> : null;
+                                        })}
+                                    </div>
+                                    <label className="mt-3 flex items-center gap-2 font-sans text-xs text-slate-400">Status
+                                        <select value={quest.status} onChange={(event) => updateQuestStatus(quest.id, event.target.value as QuestStatus)} className="rounded-lg border border-slate-700 bg-[#090c12] px-2 py-1 font-sans text-xs text-slate-100"><option value="active">Active</option><option value="completed">Completed</option><option value="clue">Unresolved clue</option></select>
+                                    </label>
+                                </article>
+                            ))}
+                            {group.items.length === 0 && <p className="text-xs text-slate-500">Nothing here yet.</p>}
+                        </section>
+                    ))}
+                </div>
+            </section>
+        </main>
+    );
+}

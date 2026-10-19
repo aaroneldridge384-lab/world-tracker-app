@@ -1,0 +1,99 @@
+﻿@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --ink: #080b12;
+  --ink-raised: #10151e;
+  --ink-soft: #171d28;
+  --parchment: #eee5d1;
+  --muted: #a9a08f;
+  --gold: #d6a84f;
+  --gold-bright: #f0c66e;
+  --line: rgba(214, 168, 79, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--ink);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--parchment);
+  background:
+    radial-gradient(ellipse at 50% -18%, rgba(92, 63, 34, 0.28), transparent 55%),
+    radial-gradient(ellipse at 100% 40%, rgba(27, 48, 53, 0.18), transparent 44%),
+    var(--ink);
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+input,
+select,
+textarea,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+::selection {
+  color: #17120a;
+  background: var(--gold-bright);
+}
+
+.fantasy-panel {
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, rgba(23, 29, 40, 0.97), rgba(13, 17, 25, 0.98));
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.025);
+}
+
+.fantasy-heading {
+  color: var(--gold-bright);
+  text-wrap: balance;
+}
+
+.fantasy-kicker {
+  color: var(--gold);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

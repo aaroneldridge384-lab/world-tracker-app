@@ -1,0 +1,40 @@
+﻿/**
+ * @file route.ts
+ * @description Next.js Server Route Handler for generating character artwork.
+ * Path: /api/generate-art
+ */
+
+import { NextResponse } from 'next/server';
+
+export async function POST(request: Request) {
+    let body: unknown;
+
+    try {
+        body = await request.json();
+    } catch {
+        return NextResponse.json({ error: 'Request body must be valid JSON.' }, { status: 400 });
+    }
+
+    if (typeof body !== 'object' || body === null) {
+        return NextResponse.json({ error: 'Request body must be an object.' }, { status: 400 });
+    }
+
+    const { prompt, characterName, kind } = body as Record<string, unknown>;
+    if (typeof prompt !== 'string' || !prompt.trim() || typeof characterName !== 'string' || !characterName.trim() || (kind !== undefined && kind !== 'portrait' && kind !== 'landscape')) {
+        return NextResponse.json(
+            { error: 'A name, prompt description, and supported artwork kind are required.' },
+            { status: 400 }
+        );
+    }
+
+    const artworkKind = kind ?? 'portrait';
+    const fullPrompt = artworkKind === 'landscape'
+        ? `dungeons and dragons fantasy landscape of ${characterName.trim()}, ${prompt.trim()}, detailed world environment concept art, no text`
+        : `dungeons and dragons portrait of ${characterName.trim()}, ${prompt.trim()}, fantasy character art, detailed digital illustration, headshot`;
+    const encodedPrompt = encodeURIComponent(fullPrompt);
+    const randomSeed = crypto.randomUUID();
+    const dimensions = artworkKind === 'landscape' ? 'width=1024&height=576' : 'width=400&height=400';
+    const generatedImageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?seed=${randomSeed}&${dimensions}&nologo=true`;
+
+    return NextResponse.json({ url: generatedImageUrl });
+}

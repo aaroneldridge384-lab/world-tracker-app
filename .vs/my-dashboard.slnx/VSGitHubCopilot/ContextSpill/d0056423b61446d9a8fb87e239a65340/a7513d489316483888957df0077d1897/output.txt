@@ -1,0 +1,203 @@
+﻿## From full 'Build' logs:
+Build started at 3:30 PM...
+1>------ Build started: Project: my-dashboard, Configuration: Debug Any CPU ------
+1>  v24.22.0
+1>  Restoring dependencies using 'npm'. This may take several minutes...
+1>
+1>  up to date, audited 82 packages in 3s
+1>
+1>  16 packages are looking for funding
+1>    run `npm fund` for details
+1>
+1>  found 0 vulnerabilities
+1>  WorkingDirectory: C:\Users\smcri\source\repos\my-dashboard\my-dashboard
+1>  ProcessStartInfo.WorkingDirectory: C:\Users\smcri\source\repos\my-dashboard\my-dashboard\
+1>
+1>  > my-dashboard@1.0.0 build
+1>  > tsc --build
+1>
+1>src/components/CharacterSheetCard.tsx(9,10): error TS2300: Duplicate identifier 'useState'.
+1>src/components/CharacterSheetCard.tsx(9,26): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+1>src/components/CharacterSheetCard.tsx(10,10): error TS2300: Duplicate identifier 'CharacterSheet'.
+1>src/components/CharacterSheetCard.tsx(10,32): error TS2307: Cannot find module '@/types/campaign' or its corresponding type declarations.
+1>src/components/CharacterSheetCard.tsx(11,10): error TS2300: Duplicate identifier 'calculateModifier'.
+1>src/components/CharacterSheetCard.tsx(11,35): error TS2307: Cannot find module '@/utils/dnd' or its corresponding type declarations.
+1>src/components/CharacterSheetCard.tsx(20,1): error TS1287: A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+1>src/components/CharacterSheetCard.tsx(20,25): error TS2323: Cannot redeclare exported variable 'default'.
+1>src/components/CharacterSheetCard.tsx(20,25): error TS2393: Duplicate function implementation.
+1>src/components/CharacterSheetCard.tsx(29,12): error TS7006: Parameter 'prevHp' implicitly has an 'any' type.
+1>src/components/CharacterSheetCard.tsx(40,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(40,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+1>src/components/CharacterSheetCard.tsx(43,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(44,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(45,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(45,77): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(46,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(48,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(49,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(52,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(53,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(53,96): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(54,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(56,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(59,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(60,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(66,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(67,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(73,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(74,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(75,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(76,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(79,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(80,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(82,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(83,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(85,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(86,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(89,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(90,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(92,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(93,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(95,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(100,15): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(101,27): error TS2339: Property 'slice' does not exist on type 'string | number | symbol'.
+1>    Property 'slice' does not exist on type 'number'.
+1>src/components/CharacterSheetCard.tsx(102,15): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(105,15): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(105,69): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(108,15): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(110,15): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(111,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(113,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(114,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(117,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(118,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(120,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(121,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(122,37): error TS7006: Parameter 'item' implicitly has an 'any' type.
+1>src/components/CharacterSheetCard.tsx(122,43): error TS7006: Parameter 'idx' implicitly has an 'any' type.
+1>src/components/CharacterSheetCard.tsx(123,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(128,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(130,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(131,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(132,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(142,10): error TS2300: Duplicate identifier 'useState'.
+1>src/components/CharacterSheetCard.tsx(142,26): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+1>src/components/CharacterSheetCard.tsx(143,10): error TS2300: Duplicate identifier 'CharacterSheet'.
+1>src/components/CharacterSheetCard.tsx(143,32): error TS2307: Cannot find module '@/types/campaign' or its corresponding type declarations.
+1>src/components/CharacterSheetCard.tsx(144,10): error TS2300: Duplicate identifier 'calculateModifier'.
+1>src/components/CharacterSheetCard.tsx(144,35): error TS2307: Cannot find module '@/utils/dnd' or its corresponding type declarations.
+1>src/components/CharacterSheetCard.tsx(153,1): error TS1287: A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+1>src/components/CharacterSheetCard.tsx(153,25): error TS2323: Cannot redeclare exported variable 'default'.
+1>src/components/CharacterSheetCard.tsx(153,25): error TS2393: Duplicate function implementation.
+1>src/components/CharacterSheetCard.tsx(162,12): error TS7006: Parameter 'prevHp' implicitly has an 'any' type.
+1>src/components/CharacterSheetCard.tsx(173,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(176,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(177,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(178,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(178,77): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(179,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(181,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(182,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(185,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(186,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(186,96): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(187,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(189,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(192,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(193,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(199,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(200,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(206,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(207,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(208,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(209,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(212,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(213,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(215,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(216,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(218,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(219,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(222,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(223,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(225,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(226,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(228,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(233,15): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(234,27): error TS2339: Property 'slice' does not exist on type 'string | number | symbol'.
+1>    Property 'slice' does not exist on type 'number'.
+1>src/components/CharacterSheetCard.tsx(235,15): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(238,15): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(238,69): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(241,15): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(243,15): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(244,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(246,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(247,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(250,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(251,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(253,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(254,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(255,37): error TS7006: Parameter 'item' implicitly has an 'any' type.
+1>src/components/CharacterSheetCard.tsx(255,43): error TS7006: Parameter 'idx' implicitly has an 'any' type.
+1>src/components/CharacterSheetCard.tsx(256,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(261,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(263,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(264,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/components/CharacterSheetCard.tsx(265,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/data/mockCampaign.ts(2,10): error TS2300: Duplicate identifier 'CharacterSheet'.
+1>src/data/mockCampaign.ts(2,26): error TS2300: Duplicate identifier 'Location'.
+1>src/data/mockCampaign.ts(2,42): error TS2307: Cannot find module '@/types/campaign' or its corresponding type declarations.
+1>src/data/mockCampaign.ts(4,1): error TS1287: A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+1>src/data/mockCampaign.ts(4,14): error TS2451: Cannot redeclare block-scoped variable 'INITIAL_CHARACTERS'.
+1>src/data/mockCampaign.ts(25,1): error TS1287: A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+1>src/data/mockCampaign.ts(25,14): error TS2451: Cannot redeclare block-scoped variable 'INITIAL_LOCATIONS'.
+1>src/data/mockCampaign.ts(34,10): error TS2300: Duplicate identifier 'CharacterSheet'.
+1>src/data/mockCampaign.ts(34,26): error TS2300: Duplicate identifier 'Location'.
+1>src/data/mockCampaign.ts(34,42): error TS2307: Cannot find module '@/types/campaign' or its corresponding type declarations.
+1>src/data/mockCampaign.ts(36,1): error TS1287: A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+1>src/data/mockCampaign.ts(36,14): error TS2451: Cannot redeclare block-scoped variable 'INITIAL_CHARACTERS'.
+1>src/data/mockCampaign.ts(57,1): error TS1287: A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+1>src/data/mockCampaign.ts(57,14): error TS2451: Cannot redeclare block-scoped variable 'INITIAL_LOCATIONS'.
+1>src/utils/dnd.ts(3,1): error TS1287: A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+1>src/utils/dnd.ts(3,17): error TS2323: Cannot redeclare exported variable 'calculateModifier'.
+1>src/utils/dnd.ts(3,17): error TS2393: Duplicate function implementation.
+1>src/utils/dnd.ts(8,1): error TS1287: A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+1>src/utils/dnd.ts(8,17): error TS2323: Cannot redeclare exported variable 'calculateModifier'.
+1>src/utils/dnd.ts(8,17): error TS2393: Duplicate function implementation.
+1>src/utils/page.tsx(6,10): error TS2300: Duplicate identifier 'INITIAL_CHARACTERS'.
+1>src/utils/page.tsx(6,36): error TS2307: Cannot find module '@/data/mockCampaign' or its corresponding type declarations.
+1>src/utils/page.tsx(7,8): error TS2300: Duplicate identifier 'CharacterSheetCard'.
+1>src/utils/page.tsx(7,32): error TS2307: Cannot find module '@/components/CharacterSheetCard' or its corresponding type declarations.
+1>src/utils/page.tsx(9,1): error TS1287: A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+1>src/utils/page.tsx(9,25): error TS2323: Cannot redeclare exported variable 'default'.
+1>src/utils/page.tsx(9,25): error TS2393: Duplicate function implementation.
+1>src/utils/page.tsx(14,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(14,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+1>src/utils/page.tsx(15,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(16,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(16,84): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(17,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(17,79): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(18,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(22,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(29,10): error TS2300: Duplicate identifier 'INITIAL_CHARACTERS'.
+1>src/utils/page.tsx(29,36): error TS2307: Cannot find module '@/data/mockCampaign' or its corresponding type declarations.
+1>src/utils/page.tsx(30,8): error TS2300: Duplicate identifier 'CharacterSheetCard'.
+1>src/utils/page.tsx(30,32): error TS2307: Cannot find module '@/components/CharacterSheetCard' or its corresponding type declarations.
+1>src/utils/page.tsx(32,1): error TS1287: A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled.
+1>src/utils/page.tsx(32,25): error TS2323: Cannot redeclare exported variable 'default'.
+1>src/utils/page.tsx(32,25): error TS2393: Duplicate function implementation.
+1>src/utils/page.tsx(37,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(38,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(39,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(39,84): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(40,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(40,79): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(41,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>src/utils/page.tsx(45,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+1>C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\microsoft.visualstudio.javascript.sdk\1.0.5984942\Sdk\Sdk.targets(201,5): error MSB3073: The command "npm run build" exited with code 2.
+========== Build: 0 succeeded or up-to-date, 1 failed, 0 skipped ==========
+========== Build completed at 3:30 PM and took 08.316 seconds ==========
+========== Deploy: 0 succeeded, 0 failed, 0 skipped ==========
+========== Deploy completed at 3:30 PM and took 08.316 seconds ==========

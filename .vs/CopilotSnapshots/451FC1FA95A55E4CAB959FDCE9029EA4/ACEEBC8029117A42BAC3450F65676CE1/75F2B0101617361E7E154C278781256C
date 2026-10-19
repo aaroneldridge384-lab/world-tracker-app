@@ -1,0 +1,27 @@
+﻿const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+async function openPage(path) {
+  const target = await fetch(`http://localhost:9230/json/new?http://localhost:3111${path}`, { method: 'PUT' }).then((response) => response.json());
+  const socket = new WebSocket(target.webSocketDebuggerUrl);
+  await new Promise((resolve) => socket.addEventListener('open', resolve, { once: true }));
+  let sequence = 0;
+  const pending = new Map();
+  socket.addEventListener('message', (event) => { const message = JSON.parse(event.data); if (message.id && pending.has(message.id)) { pending.get(message.id)(message); pending.delete(message.id); } });
+  const send = (method, params = {}) => new Promise((resolve) => { const id = ++sequence; pending.set(id, resolve); socket.send(JSON.stringify({ id, method, params })); });
+  await send('Page.enable'); await send('Runtime.enable'); await send('Page.navigate', { url: `http://localhost:3111${path}` }); await sleep(1500);
+  const evaluate = async (expression) => (await send('Runtime.evaluate', { expression, returnByValue: true })).result.result.value;
+  return { evaluate, close: async () => { socket.close(); await fetch(`http://localhost:9230/json/close/${target.id}`, { method: 'PUT' }); } };
+}
+(async () => {
+  const party = await openPage('/');
+  console.log('party cards before', await party.evaluate('document.querySelectorAll("article").length'));
+  await party.evaluate('document.querySelector("button[aria-label*=Delete]").click()'); await sleep(250);
+  console.log('party cards after', await party.evaluate('document.querySelectorAll("article").length'));
+  await party.close();
+  const story = await openPage('/story');
+  console.log('graph nodes before', await story.evaluate('document.querySelectorAll("svg g[id]").length'));
+  console.log('graph edges before', await story.evaluate('document.querySelectorAll("svg line").length'));
+  await story.evaluate('document.querySelector("svg foreignObject button").click()'); await sleep(350);
+  console.log('graph nodes after', await story.evaluate('document.querySelectorAll("svg g[id]").length'));
+  console.log('graph edges after', await story.evaluate('document.querySelectorAll("svg line").length'));
+  await story.close();
+})().catch((error) => { console.error(error); process.exitCode = 1; });

@@ -1,0 +1,47 @@
+﻿/**
+ * @file page.tsx
+ * @description Root application page for the D&D Campaign Manager.
+ */
+
+import { INITIAL_CHARACTERS } from '@/data/mockCampaign';
+import CharacterSheetCard from '@/components/CharacterSheetCard';
+
+export default function Home() {
+  // Grab our sample character from mock data
+  const sampleCharacter = INITIAL_CHARACTERS[0];
+
+  return (
+    <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6">
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-extrabold text-amber-500">D&D Campaign Manager</h1>
+        <p className="text-slate-400 text-sm mt-1">Portfolio Project Prototype</p>
+      </div>
+
+      {/* Render our interactive character sheet component */}
+      <CharacterSheetCard character={sampleCharacter} />
+    </main>
+  );
+}/**
+ * @file page.tsx
+ * @description Root application page for the D&D Campaign Manager.
+ */
+
+import { INITIAL_CHARACTERS } from '@/data/mockCampaign';
+import CharacterSheetCard from '@/components/CharacterSheetCard';
+
+export default function Home() {
+  // Grab our sample character from mock data
+  const sampleCharacter = INITIAL_CHARACTERS[0];
+
+  return (
+    <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6">
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-extrabold text-amber-500">D&D Campaign Manager</h1>
+        <p className="text-slate-400 text-sm mt-1">Portfolio Project Prototype</p>
+      </div>
+
+      {/* Render our interactive character sheet component */}
+      <CharacterSheetCard character={sampleCharacter} />
+    </main>
+  );
+}

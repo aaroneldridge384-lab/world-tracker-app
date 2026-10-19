@@ -1,0 +1,65 @@
+﻿/**
+ * @file dnd.ts
+ * @description Rules engine helper functions for D&D 5e calculations.
+ */
+
+import { AbilityName } from '@/types/campaign';
+
+/**
+ * Calculates a D&D 5e Ability Score Modifier.
+ * Formula: floor((Score - 10) / 2)
+ */
+export function calculateModifier(statValue: number): number {
+    return Math.floor((statValue - 10) / 2);
+}
+
+/**
+ * Formats a raw numerical modifier with explicit + or - sign.
+ */
+export function formatModifier(mod: number): string {
+    return mod >= 0 ? `+${mod}` : `${mod}`;
+}
+
+/**
+ * Derives 5e Proficiency Bonus based on character level.
+ */
+export function calculateProficiencyBonus(level: number): number {
+    return Math.ceil(1 + level / 4);
+}
+
+/**
+ * Calculates total skill check bonus:
+ * Ability Modifier + (Proficiency Bonus if proficient)
+ */
+export function calculateSkillBonus(
+    statValue: number,
+    isProficient: boolean,
+    proficiencyBonus: number
+): number {
+    const mod = calculateModifier(statValue);
+    return isProficient ? mod + proficiencyBonus : mod;
+}
+
+/**
+ * Default list of 5e Skills paired with their governing ability.
+ */
+export const DEFAULT_SKILLS: { name: string; ability: AbilityName }[] = [
+    { name: 'Acrobatics', ability: 'dexterity' },
+    { name: 'Animal Handling', ability: 'wisdom' },
+    { name: 'Arcana', ability: 'intelligence' },
+    { name: 'Athletics', ability: 'strength' },
+    { name: 'Deception', ability: 'charisma' },
+    { name: 'History', ability: 'intelligence' },
+    { name: 'Insight', ability: 'wisdom' },
+    { name: 'Intimidation', ability: 'charisma' },
+    { name: 'Investigation', ability: 'intelligence' },
+    { name: 'Medicine', ability: 'wisdom' },
+    { name: 'Nature', ability: 'intelligence' },
+    { name: 'Perception', ability: 'wisdom' },
+    { name: 'Performance', ability: 'charisma' },
+    { name: 'Persuasion', ability: 'charisma' },
+    { name: 'Religion', ability: 'intelligence' },
+    { name: 'Sleight of Hand', ability: 'dexterity' },
+    { name: 'Stealth', ability: 'dexterity' },
+    { name: 'Survival', ability: 'wisdom' },
+];

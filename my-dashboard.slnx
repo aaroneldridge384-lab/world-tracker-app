@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="my-dashboard/my-dashboard.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>

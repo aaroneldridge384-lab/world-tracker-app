@@ -1,0 +1,19 @@
+﻿{
+  "name": "my-dashboard",
+  "version": "1.0.0",
+  "description": "A D&D campaign manager dashboard",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "eslint": "^10.13.0",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,43 @@
+﻿const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+async function page(route) {
+  const target = await fetch(`http://localhost:9230/json/new?http://localhost:3110${route}`, { method: 'PUT' }).then((response) => response.json());
+  const socket = new WebSocket(target.webSocketDebuggerUrl);
+  await new Promise((resolve) => socket.addEventListener('open', resolve, { once: true }));
+  let sequence = 0;
+  const pending = new Map();
+  const errors = [];
+  socket.addEventListener('message', (event) => {
+    const message = JSON.parse(event.data);
+    if (message.method === 'Runtime.exceptionThrown') errors.push(message.params.exceptionDetails.text);
+    if (message.id && pending.has(message.id)) { pending.get(message.id)(message); pending.delete(message.id); }
+  });
+  const send = (method, params = {}) => new Promise((resolve) => { const id = ++sequence; pending.set(id, resolve); socket.send(JSON.stringify({ id, method, params })); });
+  await send('Page.enable'); await send('Runtime.enable');
+  await send('Page.navigate', { url: `http://localhost:3110${route}` }); await sleep(2200);
+  const evaluate = async (expression) => (await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true })).result.result.value;
+  return { target, socket, errors, evaluate, close: async () => { socket.close(); await fetch(`http://localhost:9230/json/close/${target.id}`, { method: 'PUT' }); } };
+}
+(async () => {
+  const creator = await page('/create');
+  console.log('wizard initial:', await creator.evaluate(`document.querySelector('[role="progressbar"]')?.getAttribute('aria-valuenow'), [...document.querySelectorAll('button')].map(b=>b.innerText).join('|')`));
+  await creator.evaluate(`[...document.querySelectorAll('button')].find(b=>b.innerText.includes('Next Step'))?.click()`); await sleep(300);
+  console.log('wizard step after next:', await creator.evaluate(`document.querySelector('[role="progressbar"]')?.getAttribute('aria-valuenow')`));
+  await creator.close();
+
+  const maps = await page('/maps');
+  await maps.evaluate(`document.querySelector('button').click()`); await sleep(150);
+  console.log('map options after new map:', await maps.evaluate(`document.querySelector('select').options.length`));
+  await maps.close();
+
+  const locations = await page('/locations');
+  await locations.evaluate(`(()=>{const setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;const i=document.querySelector('form input');setter.call(i,'Audit Keep');i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}));document.querySelector('form button[type="submit"]').click()})()`); await sleep(250);
+  console.log('location cards after add:', await locations.evaluate(`document.querySelectorAll('article').length`));
+  await locations.close();
+
+  const story = await page('/story');
+  console.log('story forms:', await story.evaluate(`[...document.querySelectorAll('form')].map(f=>[...f.querySelectorAll('button')].map(b=>b.innerText))`));
+  await story.evaluate(`(()=>{const set=(e,v)=>{const p=e instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;Object.getOwnPropertyDescriptor(p,'value').set.call(e,v);e.dispatchEvent(new Event('input',{bubbles:true}));e.dispatchEvent(new Event('change',{bubbles:true}))};const f=[...document.querySelectorAll('form')].find(f=>f.querySelector('input[placeholder="Note title"]'));set(f.querySelector('input[placeholder="Note title"]'),'Audit Note');set(f.querySelector('textarea[placeholder^="The party"]'),'Found [[Oakhaven]].');f.querySelector('button[type="submit"]').click()})()`); await sleep(400);
+  console.log('saved note visible:', await story.evaluate(`document.body.innerText.includes('Audit Note')`));
+  console.log('runtime errors:', [...creator.errors,...maps.errors,...locations.errors,...story.errors].length);
+  await story.close();
+})().catch((error) => { console.error(error); process.exitCode = 1; });

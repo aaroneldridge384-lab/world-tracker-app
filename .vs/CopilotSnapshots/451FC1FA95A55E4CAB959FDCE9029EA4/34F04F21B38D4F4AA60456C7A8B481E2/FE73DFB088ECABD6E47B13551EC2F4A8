@@ -1,0 +1,415 @@
+﻿/**
+ * @file CharacterWizard.tsx
+ * @description Step-by-step wizard auto-applying racial traits, languages, and class features.
+ */
+
+'use client';
+
+import { useState, useEffect } from 'react';
+import type { CharacterSheet, AbilityName, Alignment } from '@/types/campaign';
+import { DEFAULT_SKILLS, calculateModifier, calculateProficiencyBonus, formatModifier } from '@/utils/dnd';
+import { RACE_DATA, CLASS_DATA, BACKGROUND_DATA } from '@/data/dndRules';
+
+interface Props {
+    onCharacterCreated: (newCharacter: CharacterSheet) => void;
+    onCancel: () => void;
+}
+
+const ALIGNMENTS: Alignment[] = ['LG', 'NG', 'CG', 'LN', 'TN', 'CN', 'LE', 'NE', 'CE'];
+
+export default function CharacterWizard({ onCharacterCreated, onCancel }: Props) {
+    const [step, setStep] = useState<number>(1);
+
+    // Core Selections
+    const [name, setName] = useState('');
+    const [race, setRace] = useState('Wood Elf');
+    const [characterClass, setCharacterClass] = useState('Druid');
+    const [background, setBackground] = useState('Outlander');
+    const [alignment, setAlignment] = useState<Alignment>('NG');
+    const [level, setLevel] = useState(1);
+
+    // Auto-populated fields
+    const [languages, setLanguages] = useState<string[]>([]);
+    const [traits, setTraits] = useState<string[]>([]);
+    const [classFeatures, setClassFeatures] = useState<string[]>([]);
+    const [backgroundFeature, setBackgroundFeature] = useState('');
+    const [maxHp, setMaxHp] = useState(10);
+    const [armorClass, setArmorClass] = useState(14);
+
+    const [stats, setStats] = useState<Record<AbilityName, number>>({
+        strength: 10,
+        dexterity: 14,
+        constitution: 12,
+        intelligence: 10,
+        wisdom: 16,
+        charisma: 8,
+    });
+
+    const [proficientSkills, setProficientSkills] = useState<Record<string, boolean>>({});
+
+    const [feats, setFeats] = useState<string>('War Caster');
+    const [spells, setSpells] = useState<string>('Guidance, Entangle');
+    const [inventory, setInventory] = useState<string>('Quarterstaff, Leather Armor');
+    const [appearanceDescription, setAppearanceDescription] = useState('');
+
+    const proficiencyBonus = calculateProficiencyBonus(level);
+    const racialBonuses = RACE_DATA[race]?.abilityBonuses ?? {};
+    const finalStats: Record<AbilityName, number> = {
+        strength: Math.min(30, stats.strength + (racialBonuses.strength ?? 0)),
+        dexterity: Math.min(30, stats.dexterity + (racialBonuses.dexterity ?? 0)),
+        constitution: Math.min(30, stats.constitution + (racialBonuses.constitution ?? 0)),
+        intelligence: Math.min(30, stats.intelligence + (racialBonuses.intelligence ?? 0)),
+        wisdom: Math.min(30, stats.wisdom + (racialBonuses.wisdom ?? 0)),
+        charisma: Math.min(30, stats.charisma + (racialBonuses.charisma ?? 0)),
+    };
+
+    // AUTO-APPLY RACE TRAITS & LANGUAGES
+    useEffect(() => {
+        const raceRule = RACE_DATA[race];
+        if (raceRule) {
+            setLanguages(raceRule.languages);
+            setTraits(raceRule.traits);
+        }
+    }, [race]);
+
+    // AUTO-APPLY BACKGROUND FEATURE, SKILL PROFICIENCIES & CLASS HP
+    useEffect(() => {
+        const classRule = CLASS_DATA[characterClass];
+        const backgroundRule = BACKGROUND_DATA[background];
+        setClassFeatures(classRule?.features ?? []);
+        setBackgroundFeature(backgroundRule?.feature ?? '');
+
+        const defaultSkills = [
+            ...(classRule?.defaultProficiencies ?? []),
+            ...(backgroundRule?.skillProficiencies ?? []),
+        ];
+        setProficientSkills(Object.fromEntries(defaultSkills.map((skill) => [skill, true])));
+
+        if (classRule) {
+            const conModifier = calculateModifier(finalStats.constitution);
+            const hpPerAdditionalLevel = Math.max(1, Math.floor(classRule.hitDie / 2) + 1 + conModifier);
+            setMaxHp(Math.max(1, classRule.hitDie + conModifier + (level - 1) * hpPerAdditionalLevel));
+        }
+    }, [background, characterClass, level, race, stats.constitution]);
+
+    const toggleSkill = (skillName: string) => {
+        setProficientSkills((prev) => ({ ...prev, [skillName]: !prev[skillName] }));
+    };
+
+    const handleStatChange = (stat: AbilityName, val: number) => {
+        setStats((prev) => ({ ...prev, [stat]: Math.max(1, Math.min(30, val)) }));
+    };
+
+    const handleFinish = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!name.trim()) return;
+
+        const newCharacter: CharacterSheet = {
+            id: `char-${Date.now()}`,
+            name,
+            race,
+            characterClass,
+            background,
+            alignment,
+            level,
+            proficiencyBonus,
+            stats: finalStats,
+            skills: DEFAULT_SKILLS.map((s) => ({
+                ...s,
+                isProficient: !!proficientSkills[s.name],
+            })),
+            feats: feats.split(',').map((f) => f.trim()).filter(Boolean),
+            spells: spells.split(',').map((s) => s.trim()).filter(Boolean),
+            backgroundFeature,
+            languages,
+            traits,
+            classFeatures,
+            currentHp: maxHp,
+            maxHp,
+            armorClass,
+            inventory: inventory.split(',').map((i) => i.trim()).filter(Boolean),
+            appearanceDescription: appearanceDescription || `${race} ${characterClass} with a distinctive adventurer presence.`,
+        };
+
+        onCharacterCreated(newCharacter);
+    };
+
+    return (
+        <div className="max-w-2xl w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 text-slate-100 shadow-2xl space-y-6">
+            {/* Header */}
+            <div className="border-b border-slate-800 pb-4">
+                <div className="flex justify-between items-center mb-2">
+                    <h2 className="text-xl font-bold text-amber-500">5e Character Creator</h2>
+                    <span className="text-xs font-semibold text-slate-400">Step {step} of 4</span>
+                </div>
+                <div className="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-800">
+                    <div
+                        className="bg-amber-500 h-full transition-all duration-300"
+                        style={{ width: `${(step / 4) * 100}%` }}
+                    />
+                </div>
+            </div>
+
+            <form onSubmit={step === 4 ? handleFinish : (e) => { e.preventDefault(); setStep(step + 1); }}>
+
+                {/* STEP 1: Ancestry & Identity */}
+                {step === 1 && (
+                    <div className="space-y-4">
+                        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300">1. Identity & Ancestry</h3>
+                        <div>
+                            <label className="block text-xs text-slate-400 mb-1">Character Name</label>
+                            <input
+                                type="text"
+                                required
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="e.g., Lyra Moonwhisper"
+                                className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-500"
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1">Race / Ancestry</label>
+                                <select
+                                    value={race}
+                                    onChange={(e) => setRace(e.target.value)}
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-500"
+                                >
+                                    {Object.keys(RACE_DATA).map((r) => (<option key={r} value={r}>{r}</option>))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1">Background</label>
+                                <select
+                                    value={background}
+                                    onChange={(e) => setBackground(e.target.value)}
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-500"
+                                >
+                                    {Object.keys(BACKGROUND_DATA).map((item) => (
+                                        <option key={item} value={item}>{item}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1">Alignment</label>
+                                <select
+                                    value={alignment}
+                                    onChange={(e) => setAlignment(e.target.value as Alignment)}
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white"
+                                >
+                                    {ALIGNMENTS.map((value) => <option key={value} value={value}>{value}</option>)}
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1">Level</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    max="20"
+                                    value={level}
+                                    onChange={(e) => setLevel(Math.max(1, Math.min(20, Number(e.target.value))))}
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white"
+                                />
+                            </div>
+                        </div>
+
+                        {/* AUTO-DERIVED RACIAL SUMMARY BOX */}
+                        <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs space-y-2">
+                            <div>
+                                <span className="font-semibold text-amber-500">Auto-Applied Languages: </span>
+                                <span className="text-slate-300">{languages.join(', ')}</span>
+                            </div>
+                            <div>
+                                <span className="font-semibold text-amber-500">Background Feature: </span>
+                                <span className="text-slate-300">{backgroundFeature}</span>
+                            </div>
+                            <div>
+                                <span className="font-semibold text-amber-500">Racial Traits: </span>
+                                <div className="flex flex-wrap gap-1 mt-1">
+                                    {traits.map((t) => (
+                                        <span key={t} className="bg-slate-800 px-2 py-0.5 rounded text-[11px] text-slate-300 border border-slate-700">
+                                            {t}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* STEP 2: Class Features & HP */}
+                {step === 2 && (
+                    <div className="space-y-4">
+                        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300">2. Class Mechanics</h3>
+                        <div className="grid grid-cols-3 gap-3">
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1">Class</label>
+                                <select
+                                    value={characterClass}
+                                    onChange={(e) => setCharacterClass(e.target.value)}
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-sm text-white"
+                                >
+                                    {Object.keys(CLASS_DATA).map((c) => (<option key={c} value={c}>{c}</option>))}
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1">Hit Points (Calculated)</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={maxHp}
+                                    onChange={(e) => setMaxHp(Number(e.target.value))}
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-sm text-white text-center"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1">Armor Class (AC)</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={armorClass}
+                                    onChange={(e) => setArmorClass(Number(e.target.value))}
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-sm text-white text-center"
+                                />
+                            </div>
+                        </div>
+
+                        {/* AUTO-DERIVED CLASS FEATURES */}
+                        <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs">
+                            <span className="font-semibold text-amber-500 block mb-1">Auto-Applied Class Features:</span>
+                            <div className="flex flex-wrap gap-1">
+                                {classFeatures.map((f) => (
+                                    <span key={f} className="bg-slate-800 px-2 py-0.5 rounded text-[11px] text-slate-300 border border-slate-700">
+                                        {f}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-xs text-slate-400 mb-2">Ability Scores</label>
+                            <div className="grid grid-cols-3 gap-3">
+                                {(Object.keys(stats) as AbilityName[]).map((st) => (
+                                    <div key={st} className="bg-slate-950 border border-slate-800 rounded-lg p-2 text-center">
+                                        <span className="block text-[10px] uppercase font-bold text-slate-400">{st.slice(0, 3)}</span>
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            max="30"
+                                            value={finalStats[st]}
+                                            onChange={(e) => handleStatChange(st, Number(e.target.value) - (racialBonuses[st] ?? 0))}
+                                            className="w-full bg-slate-900 border border-slate-700 rounded text-center text-sm font-bold text-white p-1 my-1"
+                                        />
+                                        <span className="text-xs font-bold text-amber-500">
+                                            {formatModifier(calculateModifier(finalStats[st]))}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* STEP 3 & 4 Controls */}
+                {step === 3 && (
+                    <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300">3. Skills, Feats & Spells</h3>
+                            <span className="text-xs text-amber-500">Proficiency Bonus: {formatModifier(proficiencyBonus)}</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1">
+                            {DEFAULT_SKILLS.map((sk) => (
+                                <label
+                                    key={sk.name}
+                                    className={`flex items-center justify-between p-2 rounded-lg border text-xs cursor-pointer transition ${proficientSkills[sk.name]
+                                            ? 'bg-amber-950/40 border-amber-600/60 text-white'
+                                            : 'bg-slate-950 border-slate-800 text-slate-400'
+                                        }`}
+                                >
+                                    <span>{sk.name}</span>
+                                    <input
+                                        type="checkbox"
+                                        checked={!!proficientSkills[sk.name]}
+                                        onChange={() => toggleSkill(sk.name)}
+                                        className="accent-amber-500"
+                                    />
+                                </label>
+                            ))}
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1">Feats (comma separated)</label>
+                                <input
+                                    type="text"
+                                    value={feats}
+                                    onChange={(e) => setFeats(e.target.value)}
+                                    placeholder="e.g., War Caster"
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs text-slate-400 mb-1">Spells (comma separated)</label>
+                                <input
+                                    type="text"
+                                    value={spells}
+                                    onChange={(e) => setSpells(e.target.value)}
+                                    placeholder="e.g., Guidance, Entangle"
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {step === 4 && (
+                    <div className="space-y-4">
+                        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-300">4. Inventory & Visual Traits</h3>
+                        <div>
+                            <label className="block text-xs text-slate-400 mb-1">Equipment (comma separated)</label>
+                            <input
+                                type="text"
+                                value={inventory}
+                                onChange={(e) => setInventory(e.target.value)}
+                                placeholder="Quarterstaff, Leather Armor"
+                                className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm text-white"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs text-slate-400 mb-1">Visual Appearance Prompt</label>
+                            <textarea
+                                rows={3}
+                                value={appearanceDescription}
+                                onChange={(e) => setAppearanceDescription(e.target.value)}
+                                placeholder="A silver-haired wood elf in emerald robes holding an oak quarterstaff..."
+                                className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-white resize-none"
+                            />
+                        </div>
+                    </div>
+                )}
+
+                {/* CONTROLS */}
+                <div className="flex justify-between items-center pt-4 border-t border-slate-800 mt-6">
+                    <button
+                        type="button"
+                        onClick={step === 1 ? onCancel : () => setStep(step - 1)}
+                        className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-semibold rounded-lg transition"
+                    >
+                        {step === 1 ? 'Cancel' : '← Back'}
+                    </button>
+
+                    <button
+                        type="submit"
+                        className="px-5 py-2 bg-amber-600 hover:bg-amber-500 text-xs text-white font-semibold rounded-lg transition shadow-md"
+                    >
+                        {step === 4 ? '✨ Forge Character Sheet' : 'Next Step →'}
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
+}

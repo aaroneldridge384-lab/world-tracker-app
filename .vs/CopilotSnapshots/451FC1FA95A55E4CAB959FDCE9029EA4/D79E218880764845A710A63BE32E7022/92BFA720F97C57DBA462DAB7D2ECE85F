@@ -1,0 +1,56 @@
+﻿'use client';
+
+import { useState } from 'react';
+import { INITIAL_CHARACTERS } from '@/data/mockCampaign';
+import { CharacterSheet } from '@/types/campaign';
+import CharacterSheetCard from '@/components/CharacterSheetCard';
+import CharacterWizard from '@/components/CharacterWizard';
+
+export default function Home() {
+    const [characters, setCharacters] = useState<CharacterSheet[]>(INITIAL_CHARACTERS);
+    const [isCreating, setIsCreating] = useState(false);
+
+    const handleAddCharacter = (newChar: CharacterSheet) => {
+        setCharacters((prev) => [newChar, ...prev]);
+        setIsCreating(false);
+    };
+
+    return (
+        <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-start p-6 space-y-6">
+            <div className="text-center mt-4">
+                <h1 className="text-3xl font-extrabold text-amber-500">D&D Campaign Manager</h1>
+                <p className="text-slate-400 text-sm mt-1">Portfolio Project Prototype</p>
+            </div>
+
+            <div className="flex gap-2 bg-slate-900 p-1.5 rounded-xl border border-slate-800">
+                <button
+                    onClick={() => setIsCreating(false)}
+                    className={`px-4 py-2 text-xs font-semibold rounded-lg transition ${!isCreating ? 'bg-amber-600 text-white shadow' : 'text-slate-400 hover:text-white'
+                        }`}
+                >
+                    Party Roster ({characters.length})
+                </button>
+                <button
+                    onClick={() => setIsCreating(true)}
+                    className={`px-4 py-2 text-xs font-semibold rounded-lg transition ${isCreating ? 'bg-amber-600 text-white shadow' : 'text-slate-400 hover:text-white'
+                        }`}
+                >
+                    + 5e Creation Wizard
+                </button>
+            </div>
+
+            {isCreating ? (
+                <CharacterWizard
+                    onCharacterCreated={handleAddCharacter}
+                    onCancel={() => setIsCreating(false)}
+                />
+            ) : (
+                <div className="flex flex-col gap-6 w-full items-center">
+                    {characters.map((character) => (
+                        <CharacterSheetCard key={character.id} character={character} />
+                    ))}
+                </div>
+            )}
+        </main>
+    );
+}

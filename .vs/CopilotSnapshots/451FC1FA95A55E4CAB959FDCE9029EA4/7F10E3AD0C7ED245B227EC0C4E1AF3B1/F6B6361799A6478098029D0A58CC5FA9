@@ -1,0 +1,38 @@
+﻿/**
+ * @file route.ts
+ * @description Next.js Server Route Handler for generating character artwork.
+ * Path: /api/generate-art
+ */
+
+import { NextResponse } from 'next/server';
+
+export async function POST(request: Request) {
+    try {
+        const body = await request.json();
+        const { prompt, characterName } = body;
+
+        if (!prompt) {
+            return NextResponse.json(
+                { error: 'Prompt description is required.' },
+                { status: 400 }
+            );
+        }
+
+        // Combine character details into a clean, descriptive prompt string
+        const fullPrompt = `dungeons and dragons portrait of ${characterName}, ${prompt}, fantasy character art, detailed digital illustration, headshot`;
+
+        // Use Pollinations.ai (free AI image generation service based on text prompts)
+        const encodedPrompt = encodeURIComponent(fullPrompt);
+        // Adding a random seed guarantees a fresh image every time you click
+        const randomSeed = Math.floor(Math.random() * 10000);
+        const generatedImageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?seed=${randomSeed}&width=400&height=400&nologo=true`;
+
+        return NextResponse.json({ url: generatedImageUrl });
+    } catch (error) {
+        console.error('Error generating image:', error);
+        return NextResponse.json(
+            { error: 'Failed to generate character artwork.' },
+            { status: 500 }
+        );
+    }
+}

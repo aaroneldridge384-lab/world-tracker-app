@@ -1,0 +1,42 @@
+﻿import type { Metadata } from 'next';
+import Link from 'next/link';
+import './globals.css';
+
+export const metadata: Metadata = {
+  title: 'D&D Campaign Manager',
+  description: 'A D&D campaign manager dashboard.',
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en">
+      <body className="min-h-screen bg-slate-950 text-slate-100">
+        <header className="border-b border-slate-800 bg-slate-950/95 px-5 py-4">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
+            <Link href="/" className="text-lg font-extrabold tracking-wide text-amber-500">
+              D&amp;D Campaign Manager
+            </Link>
+            <nav aria-label="Main navigation" className="flex flex-wrap gap-2 text-sm">
+              {[
+                { href: '/', label: 'Party Roster' },
+                { href: '/create', label: 'Character Creator' },
+                { href: '/maps', label: 'Map Studio' },
+                { href: '/story', label: 'Story & Quests' },
+                { href: '/locations', label: 'World Directory' },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-lg px-3 py-2 text-slate-300 transition hover:bg-slate-800 hover:text-amber-400"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </header>
+        <div className="mx-auto max-w-7xl px-4 py-6">{children}</div>
+      </body>
+    </html>
+  );
+}

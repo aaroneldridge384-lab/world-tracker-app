@@ -1,0 +1,11 @@
+﻿// src/utils/dnd.ts
+
+export function calculateModifier(statValue: number): string {
+  const mod = Math.floor((statValue - 10) / 2);
+  return mod >= 0 ? `+${mod}` : `${mod}`;
+}// src/utils/dnd.ts
+
+export function calculateModifier(statValue: number): string {
+  const mod = Math.floor((statValue - 10) / 2);
+  return mod >= 0 ? `+${mod}` : `${mod}`;
+}

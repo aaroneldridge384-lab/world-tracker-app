@@ -1,0 +1,51 @@
+﻿/**
+ * @file campaign.ts
+ * @description Centralized TypeScript definitions for the D&D Campaign Manager.
+ */
+
+export type Alignment = 'LG' | 'NG' | 'CG' | 'LN' | 'TN' | 'CN' | 'LE' | 'NE' | 'CE';
+
+export type AbilityName = 'strength' | 'dexterity' | 'constitution' | 'intelligence' | 'wisdom' | 'charisma';
+
+/**
+ * Standard 5e Skills linked to their corresponding governing ability score.
+ */
+export interface Skill {
+    name: string;
+    ability: AbilityName;
+    isProficient: boolean;
+}
+
+/**
+ * Shape of a comprehensive D&D 5e character sheet entity.
+ */
+export interface CharacterSheet {
+    id: string;
+    name: string;
+    race: string;
+    characterClass: string;
+    background: string;
+    alignment: Alignment;
+    level: number;
+    proficiencyBonus: number;
+    stats: Record<AbilityName, number>;
+    skills: Skill[];
+    feats: string[];
+    spells: string[];
+    languages: string[];      // Auto-derived
+    traits: string[];         // Auto-derived from race
+    classFeatures: string[];  // Auto-derived from class
+    currentHp: number;
+    maxHp: number;
+    armorClass: number;
+    inventory: string[];
+    avatarUrl?: string;
+    appearanceDescription: string;
+
+export interface Location {
+    id: string;
+    name: string;
+    type: 'Continent' | 'Kingdom' | 'Town' | 'Dungeon';
+    summary: string;
+    notableFeatures: string[];
+}

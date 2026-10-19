@@ -1,0 +1,211 @@
+﻿'use client';
+
+import { useRef, useState, type PointerEvent } from 'react';
+import type { CharacterSheet, Location, StoryEdge, StoryNode, StoryNodeKind } from '@/types/campaign';
+
+interface Props {
+    nodes: StoryNode[];
+    edges: StoryEdge[];
+    characters: CharacterSheet[];
+    locations: Location[];
+    onNodesChange: (nodes: StoryNode[]) => void;
+    onEdgesChange: (edges: StoryEdge[]) => void;
+    onDeleteNode: (nodeId: string) => void;
+}
+
+const NODE_COLORS: Record<StoryNodeKind, string> = {
+    Character: '#b45309',
+    NPC: '#0369a1',
+    Location: '#15803d',
+    Quest: '#7e22ce',
+    Faction: '#be123c',
+};
+
+export default function StoryGraph({ nodes, edges, characters, locations, onNodesChange, onEdgesChange, onDeleteNode }: Props) {
+    const svgRef = useRef<SVGSVGElement>(null);
+    const dragRef = useRef<{ id: string; offsetX: number; offsetY: number } | null>(null);
+    const [dragPosition, setDragPosition] = useState<{ id: string; x: number; y: number } | null>(null);
+    const [nodeKind, setNodeKind] = useState<StoryNodeKind>('NPC');
+    const [nodeTitle, setNodeTitle] = useState('');
+    const [nodeDescription, setNodeDescription] = useState('');
+    const [linkedEntityId, setLinkedEntityId] = useState('');
+    const [fromNode, setFromNode] = useState('');
+    const [toNode, setToNode] = useState('');
+    const [relationship, setRelationship] = useState('related to');
+
+    const graphPoint = (clientX: number, clientY: number) => {
+        const svg = svgRef.current;
+        if (!svg) return { x: 0, y: 0 };
+        const bounds = svg.getBoundingClientRect();
+        return {
+            x: (clientX - bounds.left) * (1000 / bounds.width),
+            y: (clientY - bounds.top) * (600 / bounds.height),
+        };
+    };
+
+    const positionOf = (node: StoryNode) => dragPosition?.id === node.id
+        ? { x: dragPosition.x, y: dragPosition.y }
+        : { x: node.x, y: node.y };
+
+    const beginDrag = (event: PointerEvent<SVGGElement>, node: StoryNode) => {
+        event.stopPropagation();
+        svgRef.current?.setPointerCapture(event.pointerId);
+        const point = graphPoint(event.clientX, event.clientY);
+        dragRef.current = { id: node.id, offsetX: point.x - node.x, offsetY: point.y - node.y };
+        setDragPosition({ id: node.id, x: node.x, y: node.y });
+    };
+
+    const moveDrag = (event: PointerEvent<SVGSVGElement>) => {
+        const drag = dragRef.current;
+        if (!drag) return;
+        const point = graphPoint(event.clientX, event.clientY);
+        setDragPosition({
+            id: drag.id,
+            x: Math.max(80, Math.min(920, point.x - drag.offsetX)),
+            y: Math.max(40, Math.min(560, point.y - drag.offsetY)),
+        });
+    };
+
+    const finishDrag = (event: PointerEvent<SVGSVGElement>) => {
+        const drag = dragRef.current;
+        if (!drag) return;
+        const point = graphPoint(event.clientX, event.clientY);
+        const x = Math.max(80, Math.min(920, point.x - drag.offsetX));
+        const y = Math.max(40, Math.min(560, point.y - drag.offsetY));
+        onNodesChange(nodes.map((node) => node.id === drag.id ? { ...node, x, y } : node));
+        dragRef.current = null;
+        setDragPosition(null);
+    };
+
+    const addNode = (event: React.FormEvent) => {
+        event.preventDefault();
+        const title = nodeTitle.trim();
+        if (!title) return;
+        const index = nodes.length;
+        const node: StoryNode = {
+            id: crypto.randomUUID(),
+            title,
+            kind: nodeKind,
+            description: nodeDescription.trim(),
+            x: 140 + (index % 4) * 220,
+            y: 100 + Math.floor(index / 4) * 150,
+            linkedEntityId: linkedEntityId || undefined,
+        };
+        onNodesChange([...nodes, node]);
+        setNodeTitle('');
+        setNodeDescription('');
+        setLinkedEntityId('');
+    };
+
+    const addRelationship = (event: React.FormEvent) => {
+        event.preventDefault();
+        if (!fromNode || !toNode || fromNode === toNode || !relationship.trim()) return;
+        onEdgesChange([...edges, { id: crypto.randomUUID(), from: fromNode, to: toNode, label: relationship.trim() }]);
+        setRelationship('related to');
+    };
+
+    const linkedOptions = nodeKind === 'Character'
+        ? characters.map((character) => ({ id: character.id, title: character.name }))
+        : nodeKind === 'Location'
+            ? locations.map((location) => ({ id: location.id, title: location.name }))
+            : [];
+
+    return (
+        <section className="fantasy-panel space-y-4 rounded-xl p-4 sm:p-5">
+            <div>
+                <h2 className="fantasy-heading text-xl font-bold">Story Thread Graph</h2>
+                <p className="font-sans text-xs text-slate-400">Drag nodes to arrange them. Add a relationship to draw a labeled connection.</p>
+            </div>
+            <div className="overflow-hidden rounded-xl border border-amber-200/10 bg-[#090c12] shadow-inner shadow-black/50">
+                <svg
+                    ref={svgRef}
+                    viewBox="0 0 1000 600"
+                    className="w-full touch-none"
+                    style={{ minHeight: 360 }}
+                    onPointerMove={moveDrag}
+                    onPointerUp={finishDrag}
+                    onPointerCancel={finishDrag}
+                    aria-label="Interactive campaign story graph"
+                >
+                    <defs>
+                        <pattern id="graph-runes" width="38" height="38" patternUnits="userSpaceOnUse">
+                            <path d="M 38 0 L 0 0 0 38" fill="none" stroke="rgba(214,168,79,0.07)" strokeWidth="1" />
+                        </pattern>
+                        <radialGradient id="graph-glow">
+                            <stop offset="0%" stopColor="#d6a84f" stopOpacity="0.08" />
+                            <stop offset="100%" stopColor="#090c12" stopOpacity="0" />
+                        </radialGradient>
+                        <marker id="story-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L7,3 z" fill="#94a3b8" />
+                        </marker>
+                    </defs>
+                    <rect width="1000" height="600" fill="url(#graph-runes)" />
+                    <rect width="1000" height="600" fill="url(#graph-glow)" />
+                    {edges.map((edge) => {
+                        const from = nodes.find((node) => node.id === edge.from);
+                        const to = nodes.find((node) => node.id === edge.to);
+                        if (!from || !to) return null;
+                        const a = positionOf(from);
+                        const b = positionOf(to);
+                        return (
+                            <g key={edge.id}>
+                                <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="#94a3b8" strokeWidth="2" markerEnd="url(#story-arrow)" />
+                                <text x={(a.x + b.x) / 2} y={(a.y + b.y) / 2 - 8} fill="#cbd5e1" textAnchor="middle" fontSize="13">{edge.label}</text>
+                            </g>
+                        );
+                    })}
+                    {nodes.map((node) => {
+                        const point = positionOf(node);
+                        return (
+                            <g key={node.id} id={node.id} transform={`translate(${point.x - 75}, ${point.y - 30})`}>
+                                <g onPointerDown={(event) => beginDrag(event, node)} className="cursor-grab active:cursor-grabbing">
+                                    <rect width="150" height="60" rx="12" fill={NODE_COLORS[node.kind]} stroke="#fbbf24" strokeWidth="1.5" />
+                                    <text x="75" y="24" fill="white" textAnchor="middle" fontSize="11" fontWeight="bold">{node.title.slice(0, 22)}</text>
+                                    <text x="75" y="43" fill="#e2e8f0" textAnchor="middle" fontSize="10">{node.kind}</text>
+                                </g>
+                                <foreignObject x="119" y="-14" width="30" height="30">
+                                    <button
+                                        xmlns="http://www.w3.org/1999/xhtml"
+                                        type="button"
+                                        aria-label={`Delete story node ${node.title}`}
+                                        onPointerDown={(event) => event.stopPropagation()}
+                                        onClick={() => onDeleteNode(node.id)}
+                                        className="flex h-6 w-6 items-center justify-center rounded-full border border-rose-300/70 bg-[#2c221e] font-sans text-sm font-bold text-rose-100 shadow transition hover:bg-rose-800"
+                                    >
+                                        ×
+                                    </button>
+                                </foreignObject>
+                            </g>
+                        );
+                    })}
+                    {nodes.length === 0 && <text x="500" y="300" fill="#94a3b8" textAnchor="middle">Add graph nodes below to map your story.</text>}
+                </svg>
+            </div>
+
+            <div className="grid gap-4 lg:grid-cols-2">
+                <form onSubmit={addNode} className="space-y-2 rounded-lg border border-amber-200/10 bg-[#0b0f16] p-3">
+                    <h3 className="font-sans text-sm font-semibold text-amber-100">Add Node</h3>
+                    <div className="grid gap-2 sm:grid-cols-2">
+                        <select value={nodeKind} onChange={(event) => { setNodeKind(event.target.value as StoryNodeKind); setLinkedEntityId(''); }} className="rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white">
+                            {(['Character', 'NPC', 'Location', 'Quest', 'Faction'] as StoryNodeKind[]).map((kind) => <option key={kind}>{kind}</option>)}
+                        </select>
+                        <input value={nodeTitle} onChange={(event) => setNodeTitle(event.target.value)} placeholder="Node title" required className="rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white" />
+                    </div>
+                    {linkedOptions.length > 0 && <select value={linkedEntityId} onChange={(event) => { setLinkedEntityId(event.target.value); const item = linkedOptions.find((option) => option.id === event.target.value); if (item) setNodeTitle(item.title); }} className="w-full rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white"><option value="">Link to an existing entity (optional)</option>{linkedOptions.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}</select>}
+                    <textarea value={nodeDescription} onChange={(event) => setNodeDescription(event.target.value)} placeholder="Description" rows={2} className="w-full rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white" />
+                    <button type="submit" className="rounded-lg bg-gradient-to-r from-amber-700 to-amber-500 px-3 py-2 font-sans text-xs font-bold text-[#17120a] transition hover:brightness-110">Add Story Node</button>
+                </form>
+                <form onSubmit={addRelationship} className="space-y-2 rounded-lg border border-amber-200/10 bg-[#0b0f16] p-3">
+                    <h3 className="font-sans text-sm font-semibold text-amber-100">Connect Nodes</h3>
+                    <div className="grid gap-2 sm:grid-cols-2">
+                        <select value={fromNode} onChange={(event) => setFromNode(event.target.value)} required className="rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white"><option value="">From</option>{nodes.map((node) => <option key={node.id} value={node.id}>{node.title}</option>)}</select>
+                        <select value={toNode} onChange={(event) => setToNode(event.target.value)} required className="rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white"><option value="">To</option>{nodes.map((node) => <option key={node.id} value={node.id}>{node.title}</option>)}</select>
+                    </div>
+                    <input value={relationship} onChange={(event) => setRelationship(event.target.value)} placeholder="Relationship (e.g., member of)" required className="w-full rounded-lg border border-slate-700 bg-[#090c12] p-2 font-sans text-sm text-white" />
+                    <button type="submit" disabled={nodes.length < 2} className="rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 font-sans text-xs font-semibold text-white transition hover:border-amber-300/30 disabled:opacity-40">Add Relationship</button>
+                    <div className="flex flex-wrap gap-2">{edges.map((edge) => <button key={edge.id} type="button" onClick={() => onEdgesChange(edges.filter((item) => item.id !== edge.id))} className="rounded-full bg-slate-800 px-2.5 py-1 text-[11px] text-slate-300">{edge.label} ×</button>)}</div>
+                </form>
+            </div>
+        </section>
+    );
+}

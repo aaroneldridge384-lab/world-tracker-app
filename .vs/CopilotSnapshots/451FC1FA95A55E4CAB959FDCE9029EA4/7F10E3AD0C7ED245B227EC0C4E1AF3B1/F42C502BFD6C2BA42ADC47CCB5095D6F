@@ -1,0 +1,65 @@
+﻿// src/data/mockCampaign.ts
+import { CharacterSheet, Location } from '@/types/campaign';
+
+export const INITIAL_CHARACTERS: CharacterSheet[] = [
+  {
+    id: 'char-1',
+    name: 'Lyra Moonwhisper',
+    characterClass: 'Circle of the Land Druid',
+    level: 4,
+    stats: {
+      strength: 8,
+      dexterity: 14,
+      constitution: 14,
+      intelligence: 12,
+      wisdom: 17,
+      charisma: 10,
+    },
+    currentHp: 31,
+    maxHp: 31,
+    inventory: ['Quarterstaff', 'Leather Armor', 'Herbalism Kit', 'Component Pouch'],
+    appearanceDescription: 'A weathered wood elf with silver hair, wearing deep emerald robes adorned with woven vines.',
+  },
+];
+
+export const INITIAL_LOCATIONS: Location[] = [
+  {
+    id: 'loc-1',
+    name: 'Oakhaven',
+    type: 'Town',
+    summary: 'A secluded woodland settlement built into the massive branches of ancient sentient redwoods.',
+    notableFeatures: ['The Whispering Roots Tavern', 'A guarded tree-bridge entrance', 'High-altitude botanical gardens'],
+  },
+];// src/data/mockCampaign.ts
+import { CharacterSheet, Location } from '@/types/campaign';
+
+export const INITIAL_CHARACTERS: CharacterSheet[] = [
+  {
+    id: 'char-1',
+    name: 'Lyra Moonwhisper',
+    characterClass: 'Circle of the Land Druid',
+    level: 4,
+    stats: {
+      strength: 8,
+      dexterity: 14,
+      constitution: 14,
+      intelligence: 12,
+      wisdom: 17,
+      charisma: 10,
+    },
+    currentHp: 31,
+    maxHp: 31,
+    inventory: ['Quarterstaff', 'Leather Armor', 'Herbalism Kit', 'Component Pouch'],
+    appearanceDescription: 'A weathered wood elf with silver hair, wearing deep emerald robes adorned with woven vines.',
+  },
+];
+
+export const INITIAL_LOCATIONS: Location[] = [
+  {
+    id: 'loc-1',
+    name: 'Oakhaven',
+    type: 'Town',
+    summary: 'A secluded woodland settlement built into the massive branches of ancient sentient redwoods.',
+    notableFeatures: ['The Whispering Roots Tavern', 'A guarded tree-bridge entrance', 'High-altitude botanical gardens'],
+  },
+];
