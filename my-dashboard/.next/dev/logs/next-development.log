@@ -1,0 +1,9 @@
+{"timestamp":"00:00:02.039","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:08.987","source":"Server","level":"LOG","message":"○ Compiling /locations ..."}
+{"timestamp":"00:00:15.589","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:00:19.764","source":"Server","level":"LOG","message":"Defaulting to 'auto' which will select the first provider available for the model, sorted by the user's order in https://hf.co/settings/inference-providers."}
+{"timestamp":"00:00:21.095","source":"Server","level":"LOG","message":"Auto selected provider: \"fal-ai\""}
+{"timestamp":"00:00:22.597","source":"Server","level":"ERROR","message":"Hugging Face Inference Error: ProviderApiError: Failed to perform inference: You have no remaining credits. Purchase pre-paid credits to continue using Inference Providers. Alternatively, subscribe to PRO to get monthly included credits."}
+{"timestamp":"00:00:22.600","source":"Server","level":"ERROR","message":"Fallback image model also failed: TypeError: unusable"}
+{"timestamp":"00:08:20.417","source":"Browser","level":"WARN","message":"Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior=\"smooth\"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior"}
+{"timestamp":"00:08:20.706","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mDetected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior=\\\"smooth\\\"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior\\u001b[39m\""}

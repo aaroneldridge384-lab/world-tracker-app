@@ -1,0 +1,34 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/maps/layout,_N_T_/maps/page,_N_T_/maps"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/maps/__PAGE__"
+  ],
+  "prefetchHints": {
+    "hints": 64,
+    "slots": {
+      "children": {
+        "hints": 96,
+        "slots": {
+          "children": {
+            "hints": 160,
+            "slots": null
+          }
+        }
+      }
+    }
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/7cb71911974009892664257a0c871f9048db104bf269bec15f85471e310fc2bd/$/maps",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/maps/page"
+    },
+    "isFallback": false
+  }
+}

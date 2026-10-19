@@ -1,0 +1,41 @@
+'use client';
+
+import { INITIAL_CHARACTERS } from '@/data/mockCampaign';
+import CharacterSheetCard from '@/components/CharacterSheetCard';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+
+export default function Home() {
+    const [characters, setCharacters, isLoaded, storageError] = useLocalStorage('dnd-characters', INITIAL_CHARACTERS);
+
+    if (!isLoaded) return <p className="text-center text-slate-400">Loading campaign roster…</p>;
+
+    return (
+        <main className="space-y-7">
+            <header className="fantasy-panel relative overflow-hidden rounded-2xl px-6 py-7 sm:px-9 sm:py-9">
+                <div aria-hidden="true" className="absolute -right-10 -top-16 h-64 w-64 rounded-full border border-amber-200/10 bg-[radial-gradient(circle,rgba(214,168,79,0.13),transparent_68%)]" />
+                <p className="fantasy-kicker">The adventuring party</p>
+                <h1 className="fantasy-heading mt-2 text-3xl font-bold sm:text-4xl">Party Roster</h1>
+                <p className="mt-2 max-w-xl font-sans text-sm text-slate-400">Your saved adventurers, ready for the next chapter of the campaign.</p>
+                <div className="mt-5 flex items-center gap-2 text-xs font-sans text-slate-500"><span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.8)]" />Campaign ledger stored on this device</div>
+            </header>
+            {storageError && <p role="alert" className="rounded-lg border border-rose-800 bg-rose-950/40 p-3 font-sans text-sm text-rose-200">{storageError}</p>}
+            {characters.length === 0 ? (
+                <div className="fantasy-panel rounded-xl p-8 text-center font-sans text-slate-400">
+                    <span className="mb-3 block text-3xl text-amber-300">✦</span>No characters yet. Open Character Creator to add your first adventurer.
+                </div>
+            ) : (
+                <div className="grid gap-5 xl:grid-cols-2">
+                    {characters.map((character) => (
+                        <div id={character.id} key={character.id} className="w-full max-w-3xl scroll-mt-6">
+                            <CharacterSheetCard
+                                character={character}
+                                onCharacterUpdate={(updated) => setCharacters((current) => current.map((item) => item.id === updated.id ? updated : item))}
+                                onCharacterDelete={(id) => setCharacters((current) => current.filter((item) => item.id !== id))}
+                            />
+                        </div>
+                    ))}
+                </div>
+            )}
+        </main>
+    );
+}

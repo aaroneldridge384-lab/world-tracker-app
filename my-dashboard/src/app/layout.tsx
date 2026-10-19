@@ -1,0 +1,31 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import PrimaryNavigation from '@/components/PrimaryNavigation';
+import './globals.css';
+
+export const metadata: Metadata = {
+  title: 'D&D Campaign Manager',
+  description: 'A D&D campaign manager dashboard.',
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en">
+      <body className="min-h-screen text-[#2c221e]">
+        <header className="sticky top-0 z-40 border-b border-[#6e4a2d] bg-[#4a3022] px-4 text-[#fff8e9] shadow-[0_12px_32px_rgba(47,31,19,0.3)] sm:px-6">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-3 py-3">
+            <Link href="/" className="group flex items-center gap-3" aria-label="D&D Campaign Manager home">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#e2c27a]/50 bg-[#b8860b]/25 text-xl text-[#f3d48b] shadow-[inset_0_0_20px_rgba(214,168,79,0.15)] transition group-hover:border-[#f3d48b]">✦</span>
+              <span>
+                <span className="block font-sans text-[10px] font-bold uppercase tracking-[0.22em] text-[#e4c983]">Adventurer’s Codex</span>
+                <span className="block text-lg font-bold tracking-wide text-[#fff8e9]">Campaign Manager</span>
+              </span>
+            </Link>
+            <PrimaryNavigation />
+          </div>
+        </header>
+        <div className="dashboard mx-auto min-h-[calc(100vh-80px)] max-w-7xl px-4 py-7 sm:px-6 sm:py-10">{children}</div>
+      </body>
+    </html>
+  );
+}

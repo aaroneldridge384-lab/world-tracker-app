@@ -1,0 +1,130 @@
+﻿/**
+ * @file campaign.ts
+ * @description Centralized TypeScript definitions for the D&D Campaign Manager.
+ */
+
+export type Alignment = 'LG' | 'NG' | 'CG' | 'LN' | 'TN' | 'CN' | 'LE' | 'NE' | 'CE';
+
+export type AbilityName = 'strength' | 'dexterity' | 'constitution' | 'intelligence' | 'wisdom' | 'charisma';
+
+/**
+ * Standard 5e Skills linked to their corresponding governing ability score.
+ */
+export interface Skill {
+    name: string;
+    ability: AbilityName;
+    isProficient: boolean;
+}
+
+/**
+ * Shape of a comprehensive D&D 5e character sheet entity.
+ */
+export interface CharacterSheet {
+    id: string;
+    name: string;
+    race: string;
+    characterClass: string;
+    background: string;
+    alignment: Alignment;
+    level: number;
+    proficiencyBonus: number;
+    stats: Record<AbilityName, number>;
+    skills: Skill[];
+    feats: string[];
+    spells: string[];
+    backgroundFeature?: string;
+    languages: string[];      // Auto-derived
+    traits: string[];         // Auto-derived from race
+    classFeatures: string[];  // Auto-derived from class
+    currentHp: number;
+    maxHp: number;
+    armorClass: number;
+    inventory: string[];
+    avatarUrl?: string;
+    appearanceDescription: string;
+}
+
+export interface Location {
+    id: string;
+    name: string;
+    type: 'Continent' | 'Kingdom' | 'Town' | 'Dungeon';
+    summary: string;
+    notableFeatures: string[];
+    artworkUrl?: string;
+}
+
+export type MapTool = 'brush' | 'rectangle' | 'circle' | 'line' | 'eraser' | 'pin';
+export type MapPinKind = 'encounter' | 'trap' | 'loot' | 'secret' | 'note';
+
+export interface CanvasPoint {
+    x: number;
+    y: number;
+}
+
+export interface MapDrawing {
+    id: string;
+    type: Exclude<MapTool, 'pin'>;
+    points: CanvasPoint[];
+    color: string;
+    width: number;
+}
+
+export interface MapPin {
+    id: string;
+    x: number;
+    y: number;
+    kind: MapPinKind;
+    title: string;
+    note: string;
+    storyNodeId?: string;
+}
+
+export interface CampaignMap {
+    id: string;
+    name: string;
+    width: number;
+    height: number;
+    drawings: MapDrawing[];
+    pins: MapPin[];
+    backgroundImage?: string;
+    gridVisible: boolean;
+    gridOpacity: number;
+    gridSize: number;
+    snapToGrid: boolean;
+}
+
+export type StoryNodeKind = 'Character' | 'NPC' | 'Location' | 'Quest' | 'Faction';
+
+export interface StoryNode {
+    id: string;
+    title: string;
+    kind: StoryNodeKind;
+    description: string;
+    x: number;
+    y: number;
+    linkedEntityId?: string;
+}
+
+export interface StoryEdge {
+    id: string;
+    from: string;
+    to: string;
+    label: string;
+}
+
+export interface CampaignNote {
+    id: string;
+    title: string;
+    body: string;
+    updatedAt: string;
+}
+
+export type QuestStatus = 'active' | 'completed' | 'clue';
+
+export interface QuestEntry {
+    id: string;
+    title: string;
+    description: string;
+    status: QuestStatus;
+    linkedNodeIds: string[];
+}

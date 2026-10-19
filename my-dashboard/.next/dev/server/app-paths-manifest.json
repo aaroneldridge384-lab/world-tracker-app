@@ -1,0 +1,5 @@
+{
+  "/api/generate-art/route": "app/api/generate-art/route.js",
+  "/locations/page": "app/locations/page.js",
+  "/story/page": "app/story/page.js"
+}
